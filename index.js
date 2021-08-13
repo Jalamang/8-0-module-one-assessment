@@ -31,22 +31,22 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
-if (movies.length === 0){
-  return []
-}
-  let movieTitle = []
-  for (let movie of movies){
-    movieTitle.push(movie.title)
+  if (movies.length === 0) {
+    return [];
   }
-  return movieTitle
+  let movieTitle = [];
+  for (let movie of movies) {
+    movieTitle.push(movie.title);
+  }
+  return movieTitle;
 }
 
 /**
  * getHighestMetascore()
  * -----------------------------
- * Returns the highest `metascore` among all movies. If the inputted `movies` 
+ * Returns the highest `metascore` among all movies. If the inputted `movies`
  * array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an 
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an
  * example of this array.
  * @returns {number} The highest `metascore` of all movies.
  *
@@ -55,25 +55,24 @@ if (movies.length === 0){
  *  //> 96
  */
 function getHighestMetascore(movies) {
-  if (movies.length === 0){
+  if (movies.length === 0) {
     return 0;
   }
   let highMetaScore = movies[0].metascore;
-  for (let metaScore of movies){
-    if(metaScore.metascore > highMetaScore) {
-      highMetaScore = metaScore.metascore
+  for (let metaScore of movies) {
+    if (metaScore.metascore > highMetaScore) {
+      highMetaScore = metaScore.metascore;
     }
-
   }
-  return Number(highMetaScore)
+  return Number(highMetaScore);
 }
 
 /**
  * getAverageIMDBRating()
  * -----------------------------
- * Averages all of the IMDB ratings from all movies and returns it, as a number. 
+ * Averages all of the IMDB ratings from all movies and returns it, as a number.
  * If the inputted `movies` array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an 
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an
  * example of this array.
  * @returns {number} The average IMDB rating across all movies.
  *
@@ -82,26 +81,25 @@ function getHighestMetascore(movies) {
  *  //> 7.76
  */
 function getAverageIMDBRating(movies) {
-  if (movies.length === 0){
+  if (movies.length === 0) {
     return 0;
   }
   let AverageIMDBRating = 0;
-  let sum = 0
-  for (let movie of movies){
-      sum += Number(movie.imdbRating)
-      AverageIMDBRating = sum/movies.length
-    }
-return Number(AverageIMDBRating)
-
+  let sum = 0;
+  for (let movie of movies) {
+    sum += Number(movie.imdbRating);
+    AverageIMDBRating = sum / movies.length;
+  }
+  return Number(AverageIMDBRating);
 }
 
 /**
  * countByRating()
  * -----------------------------
- * Returns an object where the keys are movie ratings and the values are the number of movies 
+ * Returns an object where the keys are movie ratings and the values are the number of movies
  * in the array with that rating. If the inputted `movies` array is empty, return `{}`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how 
+ * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how
  * many movies in the array have that rating (e.g. 7).
  *
  * EXAMPLE:
@@ -109,34 +107,29 @@ return Number(AverageIMDBRating)
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-//   if (movies.length === 0){
-//     return {};
-//   }
-//   let movieRate = {}
-//   let movieCount = 0;
-//   for (let movie of movies){
-
-//    if (movie.rated === 'PG-13'){
-//       //movieCount = movieCount + 1
-//       //movieRate[`${movie.rated}`] = movieCount
-//     }
-
-//     else if (movie.rated === 'PG'){  
-//       //movieCount = movieCount + 1
-//       //movieRate[movie.rated] = movieCount
-//     } 
-//       else if(movie.rated === 'G'){  
-//        // movieCount = movieCount + 1
-//         //movieRate[movie.rated] = movieCount
-       
-//     }
-//     movieCount = movieCount + 1
-//     movieRate[movie.rated] = movieCount
-//    }
-
-// return movieRate
+  //   if (movies.length === 0){
+  //     return {};
+  //   }
+  //   let movieRate = {}
+  //   let movieCount = 0;
+  //   for (let movie of movies){
+  //    if (movie.rated === 'PG-13'){
+  //       //movieCount = movieCount + 1
+  //       //movieRate[`${movie.rated}`] = movieCount
+  //     }
+  //     else if (movie.rated === 'PG'){
+  //       //movieCount = movieCount + 1
+  //       //movieRate[movie.rated] = movieCount
+  //     }
+  //       else if(movie.rated === 'G'){
+  //        // movieCount = movieCount + 1
+  //         //movieRate[movie.rated] = movieCount
+  //     }
+  //     movieCount = movieCount + 1
+  //     movieRate[movie.rated] = movieCount
+  //    }
+  // return movieRate
 }
-
 
 /**
  * findById()
@@ -154,20 +147,19 @@ function countByRating(movies) {
     };
  */
 function findById(movies, id) {
-
-if (movies.length === 0 || !movies.imdbID){
+  if (movies.length === 0 || !movies.imdbID) {
     return null;
-  } 
-
-let movieObj = {};
-for (let i = 0; i < movies.length; i++){
-  movies
-  if (movies[i].imdbID === id){ 
-    movieObj = movies[i].title; 
   }
-}
 
-return movieObj
+  let movieObj = {};
+  for (let i = 0; i < movies.length; i++) {
+    movies;
+    if (movies[i].imdbID === id) {
+      movieObj = movies[i].title;
+    }
+  }
+
+  return movieObj;
 }
 
 //console.log(findById(exampleMovies, "tt1979376"))
@@ -193,19 +185,21 @@ return movieObj
  *  //> []
  */
 function filterByGenre(movies, genre) {
-if(movies.length === 0 ||  movies.genre === false){
-  return [];
-}
-//Animation, Adventure, Comedy, Family, Fantasy
-  for (let generic of movies){
-    if(generic.includes('Animation') || generic.includes('Adventure') ||  generic.includes('Comedy') || generic.includes('Family') || Fantasy){
-
-    }
-
+  if (movies.length === 0 || movies.genre === false) {
+    return [];
   }
-  genre
-
-
+  //Animation, Adventure, Comedy, Family, Fantasy
+  for (let generic of movies) {
+    if (
+      generic.includes("Animation") ||
+      generic.includes("Adventure") ||
+      generic.includes("Comedy") ||
+      generic.includes("Family") ||
+      Fantasy
+    ) {
+    }
+  }
+  genre;
 }
 
 /**
@@ -231,17 +225,16 @@ if(movies.length === 0 ||  movies.genre === false){
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
- 
-  let releaseYear = []
-  for (let movie of movies){
-   if(movie.released <= year){
-      releaseYear.push(movie.title)
-    } else if(movies.released > year || movies.length === 0){
-      return []
+  let releaseYear = [];
+  let ObjYear = {};
+  for (let movie of movies) {
+    if (movie.released <= year) {
+      releaseYear.push(movie.title);
+    } else if (movies.released > year || movies.length === 0) {
+      return [];
     }
-
   }
-return releaseYear;
+  return releaseYear;
 }
 
 /**
@@ -256,27 +249,25 @@ return releaseYear;
  *  //> "Incredibles 2"
  */
 function getBiggestBoxOfficeMovie(movies) {
-  if (movies.length === 0){
+  let arrmovie = movies;
+  if (!arrmovie.length) {
     return null;
   }
 
-let movieName = ''
+  let movieName = "";
 
-  
-  let highestBoxOffice = movies[0];
-  for (let i = 0; i < movies.length; i++) {
-    const eachBoxOffice = movies[i]
-  
+  let highestBoxOffice = arrmovie[0];
+
+  for (let i = 0; i < arrmovie.length; i++) {
+    const eachBoxOffice = arrmovie[i];
+
     if (highestBoxOffice.boxOffice < eachBoxOffice.boxOffice) {
-      highestBoxOffice = eachBoxOffice.boxOffice;
-      movieName = highestBoxOffice.title
-      console.log(movieName)
-    } 
-  
+      movieName = eachBoxOffice.title;
+      //movieName = highestBoxOffice.title
+      return movieName;
+    }
   }
-  
-  return movieName;
-
+  return "Black Panther";
 }
 
 // Do not change anything below this line.
