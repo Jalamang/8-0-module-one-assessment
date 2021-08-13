@@ -1,5 +1,6 @@
 /*
-  Do not change the line below. If you'd like to run code from this file, you may use the `exampleMovies` variable below to gain access to an array of movies.
+  Do not change the line below. If you'd like to run code from this file, you may use the `exampleMovies` 
+  variable below to gain access to an array of movies.
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
@@ -9,7 +10,8 @@ const exampleMovies = require("./movies");
 /**
  * getAllMovieTitles()
  * -----------------------------
- * Returns all of titles from an array of movies. If the inputted `movies` array is empty, return `[]`.
+ * Returns all of titles from an array of movies. If the inputted `movies` array is empty, 
+ * return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @returns {string[]} An array of strings, which are movie titles.
  *
@@ -28,33 +30,65 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+if (movies.length === 0){
+  return []
+}
+  let movieTitle = []
+  for (let movie of movies){
+    movieTitle.push(movie.title)
+  }
+  return movieTitle
+}
 
 /**
  * getHighestMetascore()
  * -----------------------------
- * Returns the highest `metascore` among all movies. If the inputted `movies` array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * Returns the highest `metascore` among all movies. If the inputted `movies` 
+ * array is empty, return `0`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an 
+ * example of this array.
  * @returns {number} The highest `metascore` of all movies.
  *
  * EXAMPLE:
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  if (movies.length === 0){
+    return 0;
+  }
+  let highMetaScore = movies[0].metascore;
+  for (let metaScore of movies){
+    if(metaScore.metascore > highMetaScore) {
+      highMetaScore = metaScore.metascore
+    }
+
+  }
+  return Number(highMetaScore)
+}
 
 /**
  * getAverageIMDBRating()
  * -----------------------------
- * Averages all of the IMDB ratings from all movies and returns it, as a number. If the inputted `movies` array is empty, return `0`.
- * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * Averages all of the IMDB ratings from all movies and returns it, as a number. 
+ * If the inputted `movies` array is empty, return `0`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an 
+ * example of this array.
  * @returns {number} The average IMDB rating across all movies.
  *
  * EXAMPLE:
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating() {
+  if (movies.length === 0){
+    return 0;
+  }
+
+  
+
+}
 
 /**
  * countByRating()
