@@ -107,31 +107,29 @@ function getAverageIMDBRating(movies) {
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-// {key => movie rating: value => count of movies with the same rating}
-const ratingsObj = {};
-let count1 = 0;
-let count2 = 0;
-let count3 = 0;
+  // {key => movie rating: value => count of movies with the same rating}
+  const rateObj = {};
+  let rateCountG = 0;
+  let rateCountPG = 0;
+  let rateCountPG13 = 0;
 
-if (movies.length === 0) {
-  return ratingsObj;
-}
-
-for (const eachMovie of movies) {
-  if (eachMovie.rated === 'G') {
-    count1++;
-    ratingsObj[eachMovie.rated] = count1;
-
-  } else if (eachMovie.rated === 'PG') {
-    count2++;
-    ratingsObj[eachMovie.rated] = count2;
-
-  } else if (eachMovie.rated === 'PG-13') {
-    count3++;
-    ratingsObj[eachMovie.rated] = count3;
+  if (movies.length === 0) {
+    return rateObj;
   }
-}
-return ratingsObj;
+
+  for (let eachMovie of movies) {
+    if (eachMovie.rated === "PG") {
+      rateCountPG++;
+      rateObj[eachMovie.rated] = rateCountPG;
+    } else if (eachMovie.rated === "G") {
+      rateCountG++;
+      rateObj[eachMovie.rated] = rateCountG;
+    } else if (eachMovie.rated === "PG-13") {
+      rateCountPG13++;
+      rateObj[eachMovie.rated] = rateCountPG13;
+    }
+  }
+  return rateObj;
 }
 
 /**
@@ -150,10 +148,9 @@ return ratingsObj;
     };
  */
 function findById(movies, id) {
- 
-  let movieObj = {}; 
+  let movieObj = {};
 
-  if (movies.length === 0 || (!(movies.includes(id)))) {
+  if (movies.length === 0 || !movies.includes(id)) {
     movieObj = null;
   }
   for (const eachMovie of movies) {
@@ -162,7 +159,6 @@ function findById(movies, id) {
     }
   }
   return movieObj;
-
 }
 
 //console.log(findById(exampleMovies, "tt1979376"))
@@ -188,25 +184,24 @@ function findById(movies, id) {
  *  //> []
  */
 function filterByGenre(movies, genre) {
-  if (movies.length === 0 || movies.genre === false) {
-    return [];
+  //Accumulator
+  let movieObj = [];
+  //checks edge cases
+  if (movies.length === 0 || !movies.includes(genre)) {
+    movieObj = [];
   }
-  //Animation, Adventure, Comedy, Family, Fantasy
-  for (let generic of movies) {
-    if (
-      generic.includes("Animation") ||
-      generic.includes("Adventure") ||
-      generic.includes("Comedy") ||
-      generic.includes("Family") ||
-      Fantasy
-    ) {
+
+  for (const movie of movies) {
+    if (movie.genre.toLowerCase().includes(genre.toLowerCase())) {
+      movieObj.push(movie);
     }
   }
-  genre;
+
+  return movieObj;
 }
 
 /**
- * getAllMoviesReleasedAtOrBeforeYear()
+ * getAllMovies Released At Or Before Year()
  * -----------------------------
  * Returns all movie objects with a `released` year equal to or less than the given year.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
@@ -228,21 +223,22 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
- if (!(year) && movies.length === 0){
-      return []
-     }
-     
-     let ArrayYr = [];
+  if (!year && movies.length === 0) {
+    return [];
+  }
 
-     for (const movie of movies) {
-       let fdate = movie.released.split(' ');
-       fdate = Number(fdate[fdate.length - 1]);
-   
-       if (fdate <= year) {
-         ArrayYr.push(movie);
-       }
-     }
-     return ArrayYr;
+  let ArrayYr = [];
+
+  for (const movie of movies) {
+    let movieDate = movie.released.split(" ");
+
+    movieDate = Number(movieDate[movieDate.length - 1]);
+
+    if (movieDate <= year) {
+      ArrayYr.push(movie);
+    }
+  }
+  return ArrayYr;
 }
 
 /**
