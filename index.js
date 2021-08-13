@@ -81,32 +81,68 @@ function getHighestMetascore(movies) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {
+function getAverageIMDBRating(movies) {
   if (movies.length === 0){
     return 0;
   }
-
-  
+  let AverageIMDBRating = 0;
+  let sum = 0
+  for (let movie of movies){
+      sum += Number(movie.imdbRating)
+      AverageIMDBRating = sum/movies.length
+    }
+return Number(AverageIMDBRating)
 
 }
 
 /**
  * countByRating()
  * -----------------------------
- * Returns an object where the keys are movie ratings and the values are the number of movies in the array with that rating. If the inputted `movies` array is empty, return `{}`.
+ * Returns an object where the keys are movie ratings and the values are the number of movies 
+ * in the array with that rating. If the inputted `movies` array is empty, return `{}`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
- * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how many movies in the array have that rating (e.g. 7).
+ * @returns {Object} An object where keys are movie ratings (e.g. "PG") and the values are how 
+ * many movies in the array have that rating (e.g. 7).
  *
  * EXAMPLE:
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+//   if (movies.length === 0){
+//     return {};
+//   }
+//   let movieRate = {}
+//   let movieCount = 0;
+//   for (let movie of movies){
+
+//    if (movie.rated === 'PG-13'){
+//       //movieCount = movieCount + 1
+//       //movieRate[`${movie.rated}`] = movieCount
+//     }
+
+//     else if (movie.rated === 'PG'){  
+//       //movieCount = movieCount + 1
+//       //movieRate[movie.rated] = movieCount
+//     } 
+//       else if(movie.rated === 'G'){  
+//        // movieCount = movieCount + 1
+//         //movieRate[movie.rated] = movieCount
+       
+//     }
+//     movieCount = movieCount + 1
+//     movieRate[movie.rated] = movieCount
+//    }
+
+// return movieRate
+}
+
 
 /**
  * findById()
  * -----------------------------
- * Returns a movie object from an array of objects based on the ID. If the inputted `movies` array is empty or the ID does not match any movie, return `null`.
+ * Returns a movie object from an array of objects based on the ID. If the inputted `movies`
+ *  array is empty or the ID does not match any movie, return `null`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} id - A unique `imdbID`.
  * @returns {Object|null} The movie object with the matching `imdbID`.
@@ -117,12 +153,29 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
 
+if (movies.length === 0 || !movies.imdbID){
+    return null;
+  } 
+
+let movieObj = {};
+for (let i = 0; i < movies.length; i++){
+  movies
+  if (movies[i].imdbID === id){ 
+    movieObj = movies[i].title; 
+  }
+}
+
+return movieObj
+}
+
+//console.log(findById(exampleMovies, "tt1979376"))
 /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty or no movies match the inputted `genre`, return `[]`.
+ * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array 
+ * is empty or no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -139,7 +192,21 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+if(movies.length === 0 ||  movies.genre === false){
+  return [];
+}
+//Animation, Adventure, Comedy, Family, Fantasy
+  for (let generic of movies){
+    if(generic.includes('Animation') || generic.includes('Adventure') ||  generic.includes('Comedy') || generic.includes('Family') || Fantasy){
+
+    }
+
+  }
+  genre
+
+
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -163,7 +230,19 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+ 
+  let releaseYear = []
+  for (let movie of movies){
+   if(movie.released <= year){
+      releaseYear.push(movie.title)
+    } else if(movies.released > year || movies.length === 0){
+      return []
+    }
+
+  }
+return releaseYear;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -176,7 +255,29 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  if (movies.length === 0){
+    return null;
+  }
+
+let movieName = ''
+
+  
+  let highestBoxOffice = movies[0];
+  for (let i = 0; i < movies.length; i++) {
+    const eachBoxOffice = movies[i]
+  
+    if (highestBoxOffice.boxOffice < eachBoxOffice.boxOffice) {
+      highestBoxOffice = eachBoxOffice.boxOffice;
+      movieName = highestBoxOffice.title
+      console.log(movieName)
+    } 
+  
+  }
+  
+  return movieName;
+
+}
 
 // Do not change anything below this line.
 module.exports = {
