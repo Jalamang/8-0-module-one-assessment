@@ -107,28 +107,31 @@ function getAverageIMDBRating(movies) {
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-  //   if (movies.length === 0){
-  //     return {};
-  //   }
-  //   let movieRate = {}
-  //   let movieCount = 0;
-  //   for (let movie of movies){
-  //    if (movie.rated === 'PG-13'){
-  //       //movieCount = movieCount + 1
-  //       //movieRate[`${movie.rated}`] = movieCount
-  //     }
-  //     else if (movie.rated === 'PG'){
-  //       //movieCount = movieCount + 1
-  //       //movieRate[movie.rated] = movieCount
-  //     }
-  //       else if(movie.rated === 'G'){
-  //        // movieCount = movieCount + 1
-  //         //movieRate[movie.rated] = movieCount
-  //     }
-  //     movieCount = movieCount + 1
-  //     movieRate[movie.rated] = movieCount
-  //    }
-  // return movieRate
+// {key => movie rating: value => count of movies with the same rating}
+const ratingsObj = {};
+let count1 = 0;
+let count2 = 0;
+let count3 = 0;
+
+if (movies.length === 0) {
+  return ratingsObj;
+}
+
+for (const eachMovie of movies) {
+  if (eachMovie.rated === 'G') {
+    count1++;
+    ratingsObj[eachMovie.rated] = count1;
+
+  } else if (eachMovie.rated === 'PG') {
+    count2++;
+    ratingsObj[eachMovie.rated] = count2;
+
+  } else if (eachMovie.rated === 'PG-13') {
+    count3++;
+    ratingsObj[eachMovie.rated] = count3;
+  }
+}
+return ratingsObj;
 }
 
 /**
@@ -147,19 +150,19 @@ function countByRating(movies) {
     };
  */
 function findById(movies, id) {
-  if (movies.length === 0 || !movies.imdbID) {
-    return null;
-  }
+ 
+  let movieObj = {}; 
 
-  let movieObj = {};
-  for (let i = 0; i < movies.length; i++) {
-    movies;
-    if (movies[i].imdbID === id) {
-      movieObj = movies[i].title;
+  if (movies.length === 0 || (!(movies.includes(id)))) {
+    movieObj = null;
+  }
+  for (const eachMovie of movies) {
+    if (eachMovie.imdbID === id) {
+      movieObj = eachMovie;
     }
   }
-
   return movieObj;
+
 }
 
 //console.log(findById(exampleMovies, "tt1979376"))
@@ -225,20 +228,25 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-  let releaseYear = [];
-  let ObjYear = {};
-  for (let movie of movies) {
-    if (movie.released <= year) {
-      releaseYear.push(movie.title);
-    } else if (movies.released > year || movies.length === 0) {
-      return [];
-    }
-  }
-  return releaseYear;
+ if (!(year) && movies.length === 0){
+      return []
+     }
+     
+     let ArrayYr = [];
+
+     for (const movie of movies) {
+       let fdate = movie.released.split(' ');
+       fdate = Number(fdate[fdate.length - 1]);
+   
+       if (fdate <= year) {
+         ArrayYr.push(movie);
+       }
+     }
+     return ArrayYr;
 }
 
 /**
- * getBiggestBoxOfficeMovie()
+ * get Biggest BoxOffice Movie()
  * -----------------------------
  * Returns the name of the movie with the highest `boxOffice` amount.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
