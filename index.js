@@ -107,14 +107,12 @@ function getAverageIMDBRating(movies) {
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-  // {key => movie rating: value => count of movies with the same rating}
-  const rateObj = {};
   let rateCountG = 0;
   let rateCountPG = 0;
   let rateCountPG13 = 0;
-
+  const rateObj = {};
   if (movies.length === 0) {
-    return rateObj;
+    return {};
   }
 
   for (let eachMovie of movies) {
@@ -151,7 +149,7 @@ function findById(movies, id) {
   let movieObj = {};
 
   if (movies.length === 0 || !movies.includes(id)) {
-    movieObj = null;
+    return null;
   }
   for (const eachMovie of movies) {
     if (eachMovie.imdbID === id) {
